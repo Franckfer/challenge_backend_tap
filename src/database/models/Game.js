@@ -10,17 +10,29 @@ module.exports = (sequelize, dataTypes) => {
         },
         created: {
             type: dataTypes.DATE,
-            allowNull: false
-        }
+            allowNull: true
+        },
+        game_state_id: {
+            type: dataTypes.INTEGER,
+            allowNull:false
+        },
         
     }
     
     let config = {
         tableName: "game",
-        timestamps: true
+        timestamps: false,
+        underscored: true,
     }
 
-    const Game = sequelize.define(alias, cols, config)
+    const Game = sequelize.define(alias, cols, config);
+
+    Game.associate = models => {
+        Game.belongsTo(models.StateGame, {
+            as: 'state',
+            foreignKey: 'game_state_id'
+        });
+    }
 
     return Game;
 }

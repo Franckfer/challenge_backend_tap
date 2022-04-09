@@ -1,12 +1,13 @@
 const { Router } = require("express");
 const router = Router();
+const { getGame, newGame, editGame } = require("../controllers/gamesController");
 
 
 /* /games */
 router
-    .get('/', /* controller 1 */)
-    .get('/:id', /* controller 2 */)
-    .post('/', /* controller 3 */)
+    .get('/:id', getGame)
+    .get('/', newGame)
+    .post('/', editGame)
 
     
 
